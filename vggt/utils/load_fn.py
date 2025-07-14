@@ -8,6 +8,9 @@ import torch
 from PIL import Image
 from torchvision import transforms as TF
 import numpy as np
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def load_and_preprocess_images_square(image_path_list, target_size=1024):
@@ -196,7 +199,7 @@ def load_and_preprocess_images(image_path_list, mode="crop"):
     # Check if we have different shapes
     # In theory our model can also work well with different shapes
     if len(shapes) > 1:
-        print(f"Warning: Found images with different shapes: {shapes}")
+        logger.debug(f"Warning: Found images with different shapes: {shapes}")
         # Find maximum dimensions
         max_height = max(shape[0] for shape in shapes)
         max_width = max(shape[1] for shape in shapes)
